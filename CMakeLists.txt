@@ -12,6 +12,7 @@ add_executable(AiZO
         include/SortingAlgorithm.hpp
         include/Timer.hpp
         include/BubbleSort.hpp
+        include/Experiment.hpp
 )
 
 target_include_directories(AiZO PRIVATE include)
