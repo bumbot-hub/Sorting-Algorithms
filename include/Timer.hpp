@@ -26,6 +26,7 @@ public:
 
         auto endTime = std::chrono::high_resolution_clock::now();
         isRunning = false;
+        // Calculation with millisecond precision as required by project guidelines
         return std::chrono::duration<double, std::milli>(endTime - startTime).count();
     }
 };
