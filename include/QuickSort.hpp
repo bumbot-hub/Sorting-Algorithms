@@ -4,10 +4,20 @@
 
 enum class PivotStrategy { Left, Right, Middle, Random };
 
+/**
+ * @class QuickSort
+ * @brief Advanced QuickSort implementation with multiple pivot selection strategies.
+ * Average Complexity: O(n log n). Worst case: O(n^2).
+ * Optimized with tail recursion to minimize stack depth.
+ */
 template<typename T>
 class QuickSort : public SortingAlgorithm<T> {
     PivotStrategy strategy;
 
+    /**
+     * @brief Partitions the array into two halves based on the selected pivot strategy.
+     * @return Final index of the pivot.
+     */
     int Partition(T* array, int low, int high) {
         int pivotIndex;
         if (strategy == PivotStrategy::Left) pivotIndex = low;
@@ -15,7 +25,7 @@ class QuickSort : public SortingAlgorithm<T> {
         else if (strategy == PivotStrategy::Middle) pivotIndex = low + (high - low) / 2;
         else pivotIndex = low + rand() % (high - low + 1);
 
-        std::swap(array[pivotIndex], array[high]); // Przenieś pivot na koniec
+        std::swap(array[pivotIndex], array[high]);
         T pivot = array[high];
         int i = low;
 
@@ -29,6 +39,9 @@ class QuickSort : public SortingAlgorithm<T> {
         return i;
     }
 
+    /**
+     * @brief Internal recursive function with tail-call optimization.
+     */
     void SortInternal(T* array, int low, int high)
     {
         while (low < high) {

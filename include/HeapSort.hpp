@@ -1,8 +1,19 @@
 #pragma once
 #include "SortingAlgorithm.hpp"
 
+/**
+ * @class HeapSort
+ * @brief Implementation of the HeapSort algorithm using a binary max-heap.
+ * Time Complexity: O(n log n) for all cases (best, average, worst).
+ * Space Complexity: O(1) - in-place sorting.
+ */
 template<typename T>
 class HeapSort : public SortingAlgorithm<T> {
+    /**
+     * @brief Maintains the max-heap property for a subtree.
+     * @param n Size of the heap.
+     * @param i Root index of the subtree.
+     */
     void Heapify(T* array, int n, int i) {
         int largest = i;
         int l = 2 * i + 1;

@@ -2,6 +2,12 @@
 #include "SortingAlgorithm.hpp"
 #include <string>
 
+/**
+ * @class InsertionSort
+ * @brief Classic Insertion Sort algorithm.
+ * Efficient for small datasets or nearly sorted arrays.
+ * Time Complexity: O(n^2) worst/average, O(n) best case.
+ */
 template<typename T>
 class InsertionSort : public SortingAlgorithm<T> {
 public:

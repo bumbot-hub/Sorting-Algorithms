@@ -4,6 +4,12 @@
 
 enum class ShellGapType { Shell, Knuth };
 
+/**
+ * @class ShellSort
+ * @brief Implementation of Shell's sort with support for different gap sequences.
+ * Features: Original Shell gaps (n/2^k) and Knuth's sequence (3^k-1)/2.
+ * Complexity depends on the gap sequence used.
+ */
 template<typename T>
 class ShellSort : public SortingAlgorithm<T> {
     ShellGapType gapType;
