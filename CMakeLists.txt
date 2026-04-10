@@ -7,11 +7,9 @@ include_directories(src)
 
 add_executable(AiZO
         src/Experiment.cpp
-        src/Benchmark.cpp
         include/ArrayGenerator.hpp
         include/SortingAlgorithm.hpp
         include/Timer.hpp
-        include/BubbleSort.hpp
         include/Experiment.hpp
 )
 
