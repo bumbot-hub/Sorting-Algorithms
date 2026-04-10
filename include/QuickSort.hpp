@@ -23,7 +23,7 @@ class QuickSort : public SortingAlgorithm<T> {
         if (strategy == PivotStrategy::Left) pivotIndex = low;
         else if (strategy == PivotStrategy::Right) pivotIndex = high;
         else if (strategy == PivotStrategy::Middle) pivotIndex = low + (high - low) / 2;
-        else pivotIndex = low + rand() % (high - low + 1);
+        else pivotIndex = low + rand() % (high - low + 1); // Random pivot strategy
 
         std::swap(array[pivotIndex], array[high]);
         T pivot = array[high];

@@ -18,7 +18,7 @@ public:
 
     void Sort(T* array, int size) override {
         if (gapType == ShellGapType::Shell) {
-            // Odstępy wg Shella: n/2, n/4, ..., 1
+            // Standard Shell gap sequence: n/2, n/4...
             for (int gap = size / 2; gap > 0; gap /= 2) {
                 for (int i = gap; i < size; i++) {
                     T temp = array[i];
@@ -30,7 +30,7 @@ public:
                 }
             }
         } else {
-            // Odstępy wg Knutha: h = 3h + 1
+            // Knuth gap sequence: (3^k - 1) / 2 - improves average complexity
             int h = 1;
             while (h < size / 3) h = 3 * h + 1;
 
