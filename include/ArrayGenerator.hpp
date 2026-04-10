@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include<random>
 
 template <typename T>
 class ArrayGenerator {
@@ -92,10 +93,15 @@ public:
 
 private:
     static T RandomValue(T minValue, T maxValue) {
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+
         if constexpr (std::is_integral_v<T>) {
-            return minValue + rand() % (maxValue - minValue + 1);
+            std::uniform_int_distribution<T> dist(minValue, maxValue);
+            return dist(gen);
         } else if constexpr (std::is_floating_point_v<T>) {
-            return minValue + (maxValue - minValue) * (rand() / (double)RAND_MAX);
+            std::uniform_real_distribution<T> dist(minValue, maxValue);
+            return dist(gen);
         }
     }
 };

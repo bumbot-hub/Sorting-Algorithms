@@ -34,23 +34,36 @@ void runTestMode() {
         return;
     }
 
+
     T* array = new T[size];
     for(int i=0; i<size; i++) file >> array[i];
 
-    cout << "Wczytano tablice. Wybierz algorytm (1-Heap, 2-Shell, 3-Quick Middle): ";
-    int algChoice; cin >> algChoice;
+    int choice;
+    do
+    {
+        cout << "Wczytano tablice. Wybierz algorytm (1-Heap, 2-Shell, 3-Quick Middle) lub 0. Wyjdź z trybu: ";
+        int algChoice; cin >> algChoice;
 
-    SortingAlgorithm<T>* algo = nullptr;
-    if(algChoice == 1) algo = new HeapSort<T>();
-    else if(algChoice == 2) algo = new ShellSort<T>(ShellGapType::Knuth);
-    else algo = new QuickSort<T>(PivotStrategy::Middle);
+        if(algChoice == 0) break;
 
-    cout << "Przed: "; ShowArray(array, size);
-    algo->Sort(array, size);
-    cout << "Po: "; ShowArray(array, size);
-    cout << "Czy posortowane: " << (algo->IsSorted(array, size) ? "TAK" : "NIE") << endl;
+        T* copy = new T[size];
+        for (int i=0; i<size; i++) copy[i] = array[i];
+        SortingAlgorithm<T>* algo = nullptr;
 
-    delete algo;
+
+        if(algChoice == 1) algo = new HeapSort<T>();
+        else if(algChoice == 2) algo = new ShellSort<T>(ShellGapType::Knuth);
+        else algo = new QuickSort<T>(PivotStrategy::Middle);
+
+        cout << "Przed: "; ShowArray(copy, size);
+        algo->Sort(copy, size);
+        cout << "Po: "; ShowArray(copy, size);
+        cout << "Czy posortowane: " << (algo->IsSorted(copy, size) ? "TAK" : "NIE") << endl;
+
+        delete algo;
+        delete[] copy;
+    }while (true);
+
     delete[] array;
 }
 
@@ -76,7 +89,13 @@ void RunExperiment(SortingAlgorithm<T>* algo, const char* distribution, int size
 
         timer.Start();
         algo->Sort(copy, size);
-        totalTime += timer.ElapsedTimeMs();
+        double eTime = timer.ElapsedTimeMs();
+
+        if (!algo->IsSorted(copy, size)){
+            cerr <<"Błąd sortowania: " << algo->GetName() << " dla " << distribution << endl;
+        }
+
+        totalTime += eTime;
 
         delete[] data;
         delete[] copy;
